@@ -45,7 +45,7 @@ Fonction royWarshall (listeAdj)
 Fin royWarshall
 ```
 
-#### royWarshall2 
+#### Roy-Warshall2 
 
 ```
 Fonction royWarshall2 (listeAdj)
