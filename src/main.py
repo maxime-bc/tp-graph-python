@@ -1,9 +1,14 @@
 import timeit
 from typing import List, Tuple
+from statistics import mean
 
 
 def main():
-    data_set = [[[1, 2], [2], [3], [4], []],
+    exec_number = 1
+    show_logs = False
+    data_set = [[[], [], [], [], []],
+
+                [[1, 2], [2], [3], [4], []],
 
                 [[3], [2], [], [4], [0]],
 
@@ -19,34 +24,74 @@ def main():
                  [3, 4, 5, 6, 8, 9], [0, 1, 3, 6, 8, 9], [0, 1, 2, 5, 7, 9]],
 
                 [[0, 1, 2, 6, 7, 9], [1, 8, 9], [1, 3, 5, 8, 9], [0, 2, 3, 4, 6, 9], [1, 3, 4, 7, 9], [1, 4, 9],
-                 [4, 6, 7, 9], [1, 2, 5, 9], [0, 3, 5, 6, 9], [2, 5, 9]]]
+                 [4, 6, 7, 9], [1, 2, 5, 9], [0, 3, 5, 6, 9], [2, 5, 9]],
 
-    for adjacency_list in data_set:
-        exec_time(adjacency_list)
+                [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]]
+                ]
+
+    mean_time_gain = []
+    for i in range(exec_number):
+        for adjacency_list in data_set:
+            mean_time_gain.append(exec_time(adjacency_list, show_logs))
+
+    print('\nIn average, RW2 is {0:.2f} times faster than RW1'.format(mean(mean_time_gain)))
 
 
-def exec_time(adjacency_list: List[List[int]]) -> None:
-    print('\nRunning with {} vertices {}'.format(len(adjacency_list), adjacency_list))
+def exec_time(adjacency_list: List[List[int]], log=False) -> float:
+    if log:
+        print('\nRunning with {} vertices {}'.format(len(adjacency_list), adjacency_list))
 
     start = timeit.default_timer()
     adjacency_list_to_adjacency_matrix(adjacency_list)
-    print('adjacency_list_to_adjacency_matrix : {}'.format(timeit.default_timer() - start))
+    if log:
+        print('adjacency_list_to_adjacency_matrix : {}'.format(timeit.default_timer() - start))
 
     start = timeit.default_timer()
     roy_warshall_1(adjacency_list)
-    print('roy1_matrix : {}'.format(timeit.default_timer() - start))
+    time_rw1 = timeit.default_timer() - start
+    if log:
+        print('roy1_matrix : {}'.format(time_rw1))
 
     start = timeit.default_timer()
     roy_warshall_2(adjacency_list)
-    print('roy2_matrix : {}'.format(timeit.default_timer() - start))
+    time_rw2 = timeit.default_timer() - start
+    if log:
+        print('roy2_matrix : {}'.format(time_rw2))
+
+    diff = time_rw1 / time_rw2
+    if log:
+        print('RW2 is {0:.2f} times faster than RW1'.format(diff))
 
     start = timeit.default_timer()
     depth_first_search(adjacency_list)
-    print('depth_first_search : {}'.format(timeit.default_timer() - start))
+    if log:
+        print('depth_first_search : {}'.format(timeit.default_timer() - start))
 
     start = timeit.default_timer()
     transpose_graph(adjacency_list)
-    print('transpose_graph : {}'.format(timeit.default_timer() - start))
+    if log:
+        print('transpose_graph : {}'.format(timeit.default_timer() - start))
+
+    return diff
 
 
 def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[List[int]]:
@@ -79,8 +124,6 @@ def roy_warshall_2(adjacency_list: List[List[int]]):
             if i in adjacency_list[j]:
                 adjacency_list[j].extend(adjacency_list[i])
                 adjacency_list[j] = list(set(adjacency_list[j]))
-
-        list(set(adjacency_list[i]))
 
     return adjacency_list
 
