@@ -27,11 +27,12 @@ Fonction listeAdjToMatriceAdj (listeAdj)
 Fin listeAdjToMatriceAdj
 ```
 
-#### Roy-Warshall
+### Roy-Warshall
 
 L'algorithme de Roy-Warshall 1 prend en argument une liste d'adjacence qui doit être convertie en matrice d'adjacence.
 L'algorithme de Roy-Warshall 2 prend en argument une liste d'adjacence sans devoir passer par une matrice d'adajacence.
 
+#### Pseudo-code
 ```
 Fonction royWarshall (listeAdj)
   
@@ -69,10 +70,11 @@ Fonction royWarshall2 (listeAdj)
 Fin royWarshall2
 ```
 
-#### Parcours en profondeur et composantes fortement connexes
+### Parcours en profondeur et composantes fortement connexes
 
-Cet algorithme retourne une liste des sommets dans l'ordre de leur visite lors du parcours en profondeur ainsi que les composantes fortment connexes en utilisant l'algorithme de Tarjan.
+Cet algorithme retourne une liste des sommets dans l'ordre de leur visite lors du parcours en profondeur du graphe ainsi que ses composantes fortment connexes en utilisant l'algorithme de Tarjan.
 
+#### Pseudo-code
 ```
 Fonction démarrerParcoursEnProfondeur(listeAdj)
 
@@ -137,7 +139,7 @@ Fin démarrerParcoursEnProfondeur
 ### Jeux d'essais
 
 Nous avons testé tous les algorithmes ci-dessus avec les graphes suivants (représentés sous forme de liste d'adjacence).
-Sur 1000 exécutions, l'algorithme Roy-Warshall 2 est en moyenne 2,7 fois plus rapide que l'algorithme Roy-Warshall 2.
+Sur 1000 exécutions, l'algorithme Roy-Warshall 2 est en moyenne 2,7 fois plus rapide que l'algorithme Roy-Warshall 1.
 
 ```python
    data_set = 
