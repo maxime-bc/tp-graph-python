@@ -1,130 +1,72 @@
-import timeit
+from timeit import default_timer
 from typing import List, Tuple
 from random import randrange, sample
 from statistics import mean
 
-MAX_VERTICES = 10 # Used to generate adjacency lists in function `generate_adjacency_list()`
+GRAPH_MAX_VERTICES = 10  # Used to generate adjacency lists in function `generate_adjacency_list()`
+
+""" ---------- Main ---------- """
+
 
 def main():
-    exec_number = 1
-    show_logs = False
-    data_set = [[[], [], [], [], []],
+    number_of_executions = 10000
 
-                [[1, 2], [2], [3], [4], []],
+    print('On a basis of {0} executions, {1} runs in {2:.2f} µs for a {3} vertices graph.'
+          .format(number_of_executions, roy_warshall_1.__name__,
+                  get_n_exec_time(roy_warshall_1, number_of_executions), GRAPH_MAX_VERTICES))
 
-                [[3], [2], [], [4], [0]],
+    print('On a basis of {0} executions, {1} runs in {2:.2f} µs for a {3} vertices graph.'
+          .format(number_of_executions, roy_warshall_1_bis.__name__,
+                  get_n_exec_time(roy_warshall_1_bis, number_of_executions), GRAPH_MAX_VERTICES))
 
-                [[1], [2], [0], [2], [3]],
+    print('On a basis of {0} executions, {1} runs in {2:.2f} µs for a {3} vertices graph.'
+          .format(number_of_executions, roy_warshall_2.__name__,
+                  get_n_exec_time(roy_warshall_2, number_of_executions), GRAPH_MAX_VERTICES))
 
-                [[1], [], [1], [0, 2, 6, 4], [5], [3], []],
-
-                [[0, 2, 3, 4], [1, 2, 4], [0, 2, 3, 4], [1, 2, 3, 4], [0, 2, 4]],
-
-                [[1], [2], [0], [1, 2, 5], [2, 6], [3, 4], [4], [5, 6, 7]],
-
-                [[4, 6, 8, 9], [1, 2, 7, 9], [0, 2, 9], [1, 4, 5, 6, 8, 9], [1, 8, 9], [3, 4, 6, 9], [2, 3, 5, 6, 8, 9],
-                 [3, 4, 5, 6, 8, 9], [0, 1, 3, 6, 8, 9], [0, 1, 2, 5, 7, 9]],
-
-                [[0, 1, 2, 6, 7, 9], [1, 8, 9], [1, 3, 5, 8, 9], [0, 2, 3, 4, 6, 9], [1, 3, 4, 7, 9], [1, 4, 9],
-                 [4, 6, 7, 9], [1, 2, 5, 9], [0, 3, 5, 6, 9], [2, 5, 9]],
-
-                [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]]
-                ]
-
-    mean_time_gain = []
-    for i in range(exec_number):
-        for adjacency_list in data_set:
-            mean_time_gain.append(exec_time(adjacency_list, show_logs))
-
-    print('\nIn average, RW2 is {0:.2f} times faster than RW1'.format(mean(mean_time_gain)))
+    adjacency_list = generate_adjacency_list(size=GRAPH_MAX_VERTICES)
+    print('depth_first_search : {}'.format(get_exec_time(depth_first_search, adjacency_list)))
+    print('adjacency_list_to_adjacency_matrix : {}'
+          .format(get_exec_time(adjacency_list_to_adjacency_matrix, adjacency_list)))
+    print('transpose_graph : {}'.format(get_exec_time(transpose_graph, adjacency_list)))
 
 
-def exec_time(adjacency_list: List[List[int]], log=False) -> float:
-    if log:
-        print('\nRunning with {} vertices {}'.format(len(adjacency_list), adjacency_list))
-
-    start = timeit.default_timer()
-    adjacency_list_to_adjacency_matrix(adjacency_list)
-    if log:
-        print('adjacency_list_to_adjacency_matrix : {}'.format(timeit.default_timer() - start))
-
-    start = timeit.default_timer()
-    roy_warshall_1(adjacency_list)
-    time_rw1 = timeit.default_timer() - start
-    if log:
-        print('roy1_matrix : {}'.format(time_rw1))
-
-    start = timeit.default_timer()
-    roy_warshall_2(adjacency_list)
-    time_rw2 = timeit.default_timer() - start
-    if log:
-        print('roy2_matrix : {}'.format(time_rw2))
-
-    diff = time_rw1 / time_rw2
-    if log:
-        print('RW2 is {0:.2f} times faster than RW1'.format(diff))
-
-    start = timeit.default_timer()
-    depth_first_search(adjacency_list)
-    if log:
-        print('depth_first_search : {}'.format(timeit.default_timer() - start))
-
-    start = timeit.default_timer()
-    transpose_graph(adjacency_list)
-    if log:
-        print('transpose_graph : {}'.format(timeit.default_timer() - start))
-
-    return diff
+""" ---------- Performance Tests ---------- """
 
 
-def generate_adjacency_list():
-
-  adjacency_list = []
-
-  vertices_number = randrange(1, MAX_VERTICES+1)
-  adjacency_list = [[] for i in range(vertices_number)]
-
-  for i in range(vertices_number):
-    # actual vertex can be linked to itself
-    successors_number = randrange(vertices_number+1)
-    adjacency_list[i].extend(sample(range(vertices_number), successors_number))
-
-  return adjacency_list
+def get_exec_time(function, *args):
+    start = default_timer()
+    function(*args)
+    return default_timer() - start
 
 
-def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[List[int]]:
+def get_n_exec_time(algorithm, n):
+    exec_times = []
+
+    for i in range(n):
+        adjacency_list = generate_adjacency_list(size=GRAPH_MAX_VERTICES)
+        exec_times.append(get_exec_time(algorithm, adjacency_list))
+
+    return mean(exec_times) * 10 ** 6  # Convert seconds to microseconds
+
+
+""" ---------- Roy Warshall Algorithm ---------- """
+
+
+def roy_warshall_1(adjacency_list: List[List[int]]) -> List[List[int]]:
+    # here we convert the adjacency list to an adjacency matrix
+    matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
     vertices_number = len(adjacency_list)
-    matrix = [[0 for x in range(vertices_number)] for x in range(vertices_number)]
-
-    for i in range(0, len(adjacency_list)):
-        for j in range(0, len(adjacency_list[i])):
-            matrix[i][adjacency_list[i][j]] = 1
+    for k in range(0, vertices_number):
+        for i in range(0, vertices_number):
+            for j in range(0, vertices_number):
+                matrix[i][j] = matrix[i][j] or (matrix[i][k] and matrix[k][j])
 
     return matrix
 
 
-
-def roy_Warshall1(matAdjacente: List[List[int]]) -> List[List[int]]:
-    matrix = matAdjacente
+# Another implementation of Roy Warshall's algorithm, more efficient than roy_warshall_1
+def roy_warshall_1_bis(adjacency_list: List[List[int]]) -> List[List[int]]:
+    matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
     for i in range(0, len(matrix)):
         for j in range(0, len(matrix[i])):
             if matrix[i][j] == 1:
@@ -134,38 +76,19 @@ def roy_Warshall1(matAdjacente: List[List[int]]) -> List[List[int]]:
     return matrix
 
 
-def roy_warshall_1(adjacency_list: List[List[int]]) -> List[List[int]]:
-    # here we convert the adjacency list to an adjacency matrix
-    adjacency_matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
-    vertices_number = len(adjacency_list)
-    for k in range(0, vertices_number):
-        for i in range(0, vertices_number):
-            for j in range(0, vertices_number):
-                adjacency_matrix[i][j] = adjacency_matrix[i][j] or (adjacency_matrix[i][k] and adjacency_matrix[k][j])
-
-    return adjacency_matrix
-
-
 def roy_warshall_2(adjacency_list: List[List[int]]):
-    vertices_number = len(adjacency_list)
+    matrix = adjacency_list
+    vertices_number = len(matrix)
     for i in range(vertices_number):
         for j in range(vertices_number):
-            if i in adjacency_list[j]:
-                adjacency_list[j].extend(adjacency_list[i])
-                adjacency_list[j] = list(set(adjacency_list[j]))
+            if i in matrix[j]:
+                matrix[j].extend(matrix[i])
+                matrix[j] = list(set(matrix[j]))
 
-    return adjacency_list
+    return matrix
 
 
-def transpose_graph(adjacency_list: List[List[int]]) -> List[List[int]]:
-    vertices_number = len(adjacency_list)
-    transposed_adjacency_list = [[] for i in range(vertices_number)]
-
-    for i in range(vertices_number):
-        for j in range(len(adjacency_list[i])):
-            transposed_adjacency_list[adjacency_list[i][j]].append(i)
-
-    return transposed_adjacency_list
+""" ---------- Depth First Search Algorithm ---------- """
 
 
 # return a tuple of visited vertices list and scc list using tarjan algorithm
@@ -216,6 +139,47 @@ def depth_first_search(adjacency_list: List[List[int]]) -> Tuple[List[int], List
         component.reverse()
 
     return res_visit_stack, scc
+
+
+""" ---------- Utility functions ---------- """
+
+
+def generate_adjacency_list(size=None):
+    if size is None:
+        vertices_number = randrange(1, GRAPH_MAX_VERTICES + 1)
+    else:
+        vertices_number = size
+
+    adjacency_list = [[] for i in range(vertices_number)]
+
+    for i in range(vertices_number):
+        # actual vertex can be linked to itself
+        successors_number = randrange(vertices_number + 1)
+        adjacency_list[i].extend(sample(range(vertices_number), successors_number))
+
+    return adjacency_list
+
+
+def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[List[int]]:
+    vertices_number = len(adjacency_list)
+    matrix = [[0 for x in range(vertices_number)] for x in range(vertices_number)]
+
+    for i in range(0, len(adjacency_list)):
+        for j in range(0, len(adjacency_list[i])):
+            matrix[i][adjacency_list[i][j]] = 1
+
+    return matrix
+
+
+def transpose_graph(adjacency_list: List[List[int]]) -> List[List[int]]:
+    vertices_number = len(adjacency_list)
+    transposed_adjacency_list = [[] for i in range(vertices_number)]
+
+    for i in range(vertices_number):
+        for j in range(len(adjacency_list[i])):
+            transposed_adjacency_list[adjacency_list[i][j]].append(i)
+
+    return transposed_adjacency_list
 
 
 def print_matrix(matrix: List[List[int]]) -> None:

@@ -34,7 +34,7 @@ L'algorithme de Roy-Warshall 2 prend en argument une liste d'adjacence sans devo
 
 #### Pseudo-code
 ```
-Fonction royWarshall (listeAdj)
+Fonction royWarshall1 (listeAdj)
   
   matriceAdj = listeAdjToMatriceAdj(listeAdj)
   nbSommets = taille(listeAdj)
@@ -49,33 +49,29 @@ Fonction royWarshall (listeAdj)
 
   Retourner matriceAdj
  
-Fin royWarshall
+Fin royWarshall1
 
-                    if matrix[j][x] == 1:
-                        matrix[i][x] = matrix[j][x]
 
-Fonction roy_Wharshall_bis (listeAdj)
+Fonction royWarshall1Bis (listeAdj)
 
   matriceAdj = listeAdjToMatriceAdj(listeAdj)
   nbSommets = taille(listeAdj)
     
   Pour i allant de 0 à nbSommets
     Pour j allant de 0 à nbSommets
-    si matriceAdj[i][j] = 1 alors
-      Pour k allant de 0 à nbSommets
-        si matriceAdj[j][k] = 1 alors
-          matriceAdj[i][k] = matriceAdj[j][k]
-      Fin Pour
+      Si matriceAdj[i][j] = 1 alors
+        Pour k allant de 0 à nbSommets
+          Si matriceAdj[j][k] = 1 alors
+            matriceAdj[i][k] = matriceAdj[j][k]
+          Fin Si
+        Fin Pour
+      Fin Si
     Fin Pour
   Fin Pour
 
   Retourner matriceAdj
  
-Fin roy_Warshall_bis
-
-
-
-
+Fin royWarshall1Bis
 
 
 Fonction royWarshall2 (listeAdj)
