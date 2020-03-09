@@ -122,6 +122,18 @@ def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[
     return matrix
 
 
+
+def roy_Warshall1(matAdjacente: List[List[int]]) -> List[List[int]]:
+    matrix = matAdjacente
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[i])):
+            if matrix[i][j] == 1:
+                for x in range(0, len(matrix[j])):
+                    if matrix[j][x] == 1:
+                        matrix[i][x] = matrix[j][x]
+    return matrix
+
+
 def roy_warshall_1(adjacency_list: List[List[int]]) -> List[List[int]]:
     # here we convert the adjacency list to an adjacency matrix
     adjacency_matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
