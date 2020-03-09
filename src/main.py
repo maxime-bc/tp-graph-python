@@ -100,7 +100,7 @@ def generate_adjacency_list():
 
   adjacency_list = []
 
-  vertices_number = randrange(MAX_VERTICES)
+  vertices_number = randrange(1, MAX_VERTICES+1)
   adjacency_list = [[] for i in range(vertices_number)]
 
   for i in range(vertices_number):
