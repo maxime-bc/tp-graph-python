@@ -204,7 +204,6 @@ def print_matrix(matrix: List[List[int]]) -> None:
 
     i = 0
     for row in matrix:
-        y = 0
         print('{} |'.format(i), end=' ')
         for val in row:
             print(val, end=' ')
