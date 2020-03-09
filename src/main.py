@@ -1,7 +1,9 @@
 import timeit
 from typing import List, Tuple
+from random import randrange, sample
 from statistics import mean
 
+MAX_VERTICES = 10 # Used to generate adjacency lists in function `generate_adjacency_list()`
 
 def main():
     exec_number = 1
@@ -92,6 +94,21 @@ def exec_time(adjacency_list: List[List[int]], log=False) -> float:
         print('transpose_graph : {}'.format(timeit.default_timer() - start))
 
     return diff
+
+
+def generate_adjacency_list():
+
+  adjacency_list = []
+
+  vertices_number = randrange(MAX_VERTICES)
+  adjacency_list = [[] for i in range(vertices_number)]
+
+  for i in range(vertices_number):
+    # actual vertex can be linked to itself
+    successors_number = randrange(vertices_number+1)
+    adjacency_list[i].extend(sample(range(vertices_number), successors_number))
+
+  return adjacency_list
 
 
 def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[List[int]]:
