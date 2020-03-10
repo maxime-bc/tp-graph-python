@@ -29,8 +29,12 @@ Fin listeAdjToMatriceAdj
 
 ### Roy-Warshall
 
-L'algorithme de Roy-Warshall 1 prend en argument une liste d'adjacence qui doit être convertie en matrice d'adjacence.
-L'algorithme de Roy-Warshall 2 prend en argument une liste d'adjacence sans devoir passer par une matrice d'adajacence.
+L'algorithme royWarshall1 prend en argument une liste d'adjacence qui doit être convertie en matrice d'adjacence.
+L'algorithme royWarshall1Bis est une implémentation différente de royWarshall1.
+
+L'algorithme royWarshall2 prend en argument une liste d'adjacence sans passer par une matrice d'adajacence.
+
+Cet algorithme permet de déterminer la fermeture transitive d'un graphe, où chaque sommet est relié à tous les autres sommets du graphe.
 
 #### Pseudo-code
 ```
@@ -94,7 +98,7 @@ Fin royWarshall2
 
 ### Parcours en profondeur et composantes fortement connexes
 
-Cet algorithme retourne une liste des sommets dans l'ordre de leur visite lors du parcours en profondeur du graphe ainsi que ses composantes fortment connexes en utilisant l'algorithme de Tarjan.
+Cet algorithme retourne une liste des sommets dans l'ordre de leur visite lors du parcours en profondeur du graphe ainsi que ses composantes fortement connexes en utilisant l'algorithme de Tarjan.
 
 #### Pseudo-code
 ```
@@ -160,52 +164,11 @@ Fin démarrerParcoursEnProfondeur
 
 ### Jeux d'essais
 
-Nous avons testé tous les algorithmes ci-dessus avec les graphes suivants (représentés sous forme de liste d'adjacence).
-Sur 1000 exécutions, l'algorithme Roy-Warshall 2 est en moyenne 2,7 fois plus rapide que l'algorithme Roy-Warshall 1.
+Les 3 différentes fonctions implémentant l'algorithme de Roy-Warshall ont été exécutés 10000 fois chacune avec des graphes dont le nombre de sommets allait de 1 à 15.
 
-```python
-   data_set = 
-    [[[], [], [], [], []],
+On peut voir sur le diagramme ci-dessous que l'algorithme le plus efficace est Roy-Warshall 2 (environ 2 fois plus efficace que Roy-Warshall 1).
+On remarque également que l'efficacité de Roy-Warshall 1 Bis diminue à mesure que le nombre de sommets augmente, jusqu'à devenir moins efficace que Roy-Warshall 1.
 
-    [[1, 2], [2], [3], [4], []],
-
-    [[3], [2], [], [4], [0]],
-
-    [[1], [2], [0], [2], [3]],
-
-    [[1], [], [1], [0, 2, 6, 4], [5], [3], []],
-
-    [[0, 2, 3, 4], [1, 2, 4], [0, 2, 3, 4], [1, 2, 3, 4], [0, 2, 4]],
-
-    [[1], [2], [0], [1, 2, 5], [2, 6], [3, 4], [4], [5, 6, 7]],
-
-    [[4, 6, 8, 9], [1, 2, 7, 9], [0, 2, 9], [1, 4, 5, 6, 8, 9], [1, 8, 9], [3, 4, 6, 9], [2, 3, 5, 6, 8, 9],
-     [3, 4, 5, 6, 8, 9], [0, 1, 3, 6, 8, 9], [0, 1, 2, 5, 7, 9]],
-
-    [[0, 1, 2, 6, 7, 9], [1, 8, 9], [1, 3, 5, 8, 9], [0, 2, 3, 4, 6, 9], [1, 3, 4, 7, 9], [1, 4, 9],
-     [4, 6, 7, 9], [1, 2, 5, 9], [0, 3, 5, 6, 9], [2, 5, 9]],
-
-    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]]
-    ]
-
+[Image]
 
 ```
