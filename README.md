@@ -169,6 +169,7 @@ Les 3 différentes fonctions implémentant l'algorithme de Roy-Warshall ont ét�
 On peut voir sur le diagramme ci-dessous que l'algorithme le plus efficace est Roy-Warshall 2 (environ 2 fois plus efficace que Roy-Warshall 1).
 On remarque également que l'efficacité de Roy-Warshall 1 Bis diminue à mesure que le nombre de sommets augmente, jusqu'à devenir moins efficace que Roy-Warshall 1.
 
-[Image]
+![Alt text](diagram.png?raw=true)
+
 
 ```
