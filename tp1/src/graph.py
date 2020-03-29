@@ -1,33 +1,45 @@
+import sys
 from timeit import default_timer
 from typing import List, Tuple
 from random import randrange, sample
 from statistics import mean
+import matplotlib.pyplot as plt
 
-GRAPH_MAX_VERTICES = 10  # Used to generate adjacency lists in function `generate_adjacency_list()`
-
-""" ---------- Main ---------- """
+""" ---------- Plot Roy Warshall exec times ---------- """
 
 
-def main():
-    number_of_executions = 10000
+def main() -> None:
+    max_graph_size = 21
+    number_of_executions = 1000
 
-    print('On a basis of {0} executions, {1} runs in {2:.2f} µs for a {3} vertices graph.'
-          .format(number_of_executions, roy_warshall_1.__name__,
-                  get_n_exec_time(roy_warshall_1, number_of_executions), GRAPH_MAX_VERTICES))
+    print("{} executions".format(number_of_executions))
 
-    print('On a basis of {0} executions, {1} runs in {2:.2f} µs for a {3} vertices graph.'
-          .format(number_of_executions, roy_warshall_1_bis.__name__,
-                  get_n_exec_time(roy_warshall_1_bis, number_of_executions), GRAPH_MAX_VERTICES))
+    line1 = []
+    line2 = []
+    line3 = []
 
-    print('On a basis of {0} executions, {1} runs in {2:.2f} µs for a {3} vertices graph.'
-          .format(number_of_executions, roy_warshall_2.__name__,
-                  get_n_exec_time(roy_warshall_2, number_of_executions), GRAPH_MAX_VERTICES))
+    for i in range(1, max_graph_size):
+        sys.stdout.write('{0:.1f}% processed (vertex n° {1}) \r'.format(i / max_graph_size * 100, i))
+        sys.stdout.flush()
 
-    adjacency_list = generate_adjacency_list(size=GRAPH_MAX_VERTICES)
-    print('depth_first_search : {}'.format(get_exec_time(depth_first_search, adjacency_list)))
-    print('adjacency_list_to_adjacency_matrix : {}'
-          .format(get_exec_time(adjacency_list_to_adjacency_matrix, adjacency_list)))
-    print('transpose_graph : {}'.format(get_exec_time(transpose_graph, adjacency_list)))
+        line1.append(get_n_exec_time(roy_warshall_1, number_of_executions, i))
+        line2.append(get_n_exec_time(roy_warshall_1_bis, number_of_executions, i))
+        line3.append(get_n_exec_time(roy_warshall_2, number_of_executions, i))
+
+    sys.stdout.write('100% processed ({} vertices) \r'.format(max_graph_size - 1))
+    vertices_number = [*range(1, max_graph_size)]
+
+    plt.plot(vertices_number, line1, label='Roy Warshall 1')
+    plt.plot(vertices_number, line2, label='Roy Warshall 1 Bis')
+    plt.plot(vertices_number, line3, label='Roy Warshall 2')
+
+    plt.grid()
+
+    plt.ylabel('Average exec time (in µs)')
+    plt.xlabel('Number of vertices')
+    plt.title('Average exec time of the 3 different Roy Warshall algorithms ({} execs)'.format(number_of_executions))
+    plt.legend()
+    plt.show()
 
 
 """ ---------- Performance Tests ---------- """
@@ -39,11 +51,11 @@ def get_exec_time(function, *args):
     return default_timer() - start
 
 
-def get_n_exec_time(algorithm, n):
+def get_n_exec_time(algorithm, n, size):
     exec_times = []
 
     for i in range(n):
-        adjacency_list = generate_adjacency_list(size=GRAPH_MAX_VERTICES)
+        adjacency_list = generate_adjacency_list(size)
         exec_times.append(get_exec_time(algorithm, adjacency_list))
 
     return mean(exec_times) * 10 ** 6  # Convert seconds to microseconds
@@ -144,12 +156,7 @@ def depth_first_search(adjacency_list: List[List[int]]) -> Tuple[List[int], List
 """ ---------- Utility functions ---------- """
 
 
-def generate_adjacency_list(size=None):
-    if size is None:
-        vertices_number = randrange(1, GRAPH_MAX_VERTICES + 1)
-    else:
-        vertices_number = size
-
+def generate_adjacency_list(vertices_number):
     adjacency_list = [[] for i in range(vertices_number)]
 
     for i in range(vertices_number):
@@ -171,7 +178,7 @@ def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[
     return matrix
 
 
-def transpose_graph(adjacency_list: List[List[int]]) -> List[List[int]]:
+def transpose_adjacency_list(adjacency_list: List[List[int]]) -> List[List[int]]:
     vertices_number = len(adjacency_list)
     transposed_adjacency_list = [[] for i in range(vertices_number)]
 
@@ -205,4 +212,5 @@ def print_matrix(matrix: List[List[int]]) -> None:
     print('')
 
 
-main()
+if __name__ == "__main__":
+    main()
