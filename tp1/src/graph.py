@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 
 
 def main() -> None:
+    min_graph_size = 1
     max_graph_size = 21
-    number_of_executions = 1000
+    number_of_executions = 10000
 
     print("{} executions".format(number_of_executions))
 
@@ -18,8 +19,8 @@ def main() -> None:
     line2 = []
     line3 = []
 
-    for i in range(1, max_graph_size):
-        sys.stdout.write('{0:.1f}% processed (vertex n° {1}) \r'.format(i / max_graph_size * 100, i))
+    for i in range(min_graph_size, max_graph_size):
+        sys.stdout.write('{0:.1f}% processed ({1} vertices) \r'.format(i / max_graph_size * 100, i))
         sys.stdout.flush()
 
         line1.append(get_n_exec_time(roy_warshall_1, number_of_executions, i))
