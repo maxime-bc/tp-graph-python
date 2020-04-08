@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 def main() -> None:
     min_graph_size = 1
     max_graph_size = 21
-    number_of_executions = 10000
+    number_of_executions = 1000
 
     print("{} executions".format(number_of_executions))
 

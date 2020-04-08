@@ -164,12 +164,49 @@ Fin démarrerParcoursEnProfondeur
 
 ### Jeux d'essais
 
-Les 3 différentes fonctions implémentant l'algorithme de Roy-Warshall ont été exécutés 10000 fois chacune avec des graphes dont le nombre de sommets allait de 1 à 15.
+Afin de comparer la performance des différentes implémentations de Roy-Warshall, nous avons écrit une fonction qui génère des graphs aléatoirement.
+
+```
+Fonction génèreGraph (nbSommets)
+
+  graph := liste contenant nbSommets sous-listes vides
+  
+  Pour i allant de 0 à nbSommets-1
+    nbSuccesseurs := nombre aléatoire supérieur ou égal à 0 et inférieur ou égal à nbSommets
+    On ajoute un nombre aléatoire de successeurs compris entre 0 à nbSommets dans graph[i]
+  Fin Pour
+  
+  Retourner graph
+  
+Fin génèreGraph
+```
+
+Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphs aléatoires dont la taille augmente progressivement de a à b, b non compris.
+
+Exemple ci-dessous, avec n = 1000, a = 1, b = 21 (la taille des graphs générés varie de 1 à 20)
+
+![Figure1](/tp1/figure1.png?raw=true)
 
 On peut voir sur le diagramme ci-dessous que l'algorithme le plus efficace est Roy-Warshall 2 (environ 2 fois plus efficace que Roy-Warshall 1).
-On remarque également que l'efficacité de Roy-Warshall 1 Bis diminue à mesure que le nombre de sommets augmente, jusqu'à devenir moins efficace que Roy-Warshall 1.
+On remarque également que Roy-Warshall 1 Bis est l'implémantation la moins efficace.
 
-![Alt text](diagram.png?raw=true)
+Cependant, si on zoome dans le diagramme, on peut voir que Roy-Warshall 1 bis est très légèrement plus efficace que Roy-Warshall 1 pour des graphs avec des sommets allant de 1 à 7/8.
 
+![Figure2](/tp1/figure2.png?raw=true)
 
+Le diagramme peut être visualié en exécutant les commandes suivantes dans un terminal (sur linux) :
+
+```bash
+python3 -m venv venv # création d'un environnement virtuel pour installer la bibliothèque matplotlib
+source venv/bin/activate # activation de l'environnement virtuel
+pip3 install matplotlib # installation de la bibliothèque Python matplotlib
+python3 tp1/src/graph.py # exécution du script Python qui génère les diagrammes
+```
+Les paramètres d'exécution peuvent être modifiées au début du fichier `tp1/src/graph.py` :
+
+```python
+def main() -> None:
+    min_graph_size = 1 # i
+    max_graph_size = 21 # j, la taille des graph générés va varier de 1 à 20
+    number_of_executions = 10000 #n, nombre d'exécutions
 ```
