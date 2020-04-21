@@ -4,7 +4,7 @@ Pierre BRUOT et Maxime BLANCHON
 
 ### Mise en niveau des sommets du graph
 
-But ?
+Cet algorithme prend en paramètre une liste d'ajacence et renvoie une liste contenant les niveaux de chaque sommet d'un graphe sans circuit.
 
 #### Pseudo-code
 
@@ -44,7 +44,7 @@ La liste d'association est une liste de liste d'entiers qui permet d'associer un
  1 - le numéro du sommet \
  2 - son niveau 
  
- Cette liste d'association est utilisée pour appliquer la fonction de Grundy à chaque sommet d'un graph.
+La création de cette liste d'association est intermédiaire et permet par la suite d'appliquer la fonction de Grundy à chaque sommet d'un graph.
 
 #### Pseudo-code
 ```
@@ -57,14 +57,14 @@ Fonction CréationDeLaListeD'association (listeAdj)
     Pour i allant de 0 à nbSommets
         On ajoute dans la sous-liste listeD'association i, le numéro du sommet, ainsi que niveaux[i], le niveau du sommet i
 
-    Retourner la listeD'association triée en fonction du niveau de chaque sous-liste
+    Retourner la listeD'association triée de manière croissante en fonction du niveau de chaque sous-liste
 
 Fin CréationDeLaListeD'association
 ```
 
 ### Fonction de grundy
 
-But ?
+Cet algorithme prend en paramètre une liste d'adjacence et retourne une liste contenant le chiffre de Grundy pour chaque sommet du graphe.
 
 #### Pseudo-code
 

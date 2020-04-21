@@ -4,7 +4,7 @@ Pierre BRUOT et Maxime BLANCHON
 
 ### Conversion liste d'adjacence - matrice d'adjacence
 
-Le but de cet algorithme est d'obtenir la matrice d'adjacence correpsondant au graphe donné en entrée sous forme de liste d'adjacence. Cet algorithme est utilisé dans la version 1 de Roy-Warshall qui utilise une matrice d'adjacence. 
+Le but de cet algorithme est d'obtenir la matrice d'adjacence correspondant au graphe donné en entrée sous forme de liste d'adjacence. Cet algorithme est utilisé dans la version 1 de Roy-Warshall qui utilise une matrice d'adjacence. 
 
 #### Pseudo-code
 
@@ -32,7 +32,7 @@ Fin listeAdjToMatriceAdj
 L'algorithme royWarshall1 prend en argument une liste d'adjacence qui doit être convertie en matrice d'adjacence.
 L'algorithme royWarshall1Bis est une implémentation différente de royWarshall1.
 
-L'algorithme royWarshall2 prend en argument une liste d'adjacence sans passer par une matrice d'adajacence.
+L'algorithme royWarshall2 prend en argument une liste d'adjacence sans passer par une matrice d'adjacence.
 
 Cet algorithme permet de déterminer la fermeture transitive d'un graphe, où chaque sommet est relié à tous les autres sommets du graphe.
 
@@ -188,13 +188,13 @@ Exemple ci-dessous, avec n = 1000, a = 1, b = 21 (la taille des graphs généré
 ![Figure1](/tp1/figure1.png?raw=true)
 
 On peut voir sur le diagramme ci-dessous que l'algorithme le plus efficace est Roy-Warshall 2 (environ 2 fois plus efficace que Roy-Warshall 1).
-On remarque également que Roy-Warshall 1 Bis est l'implémantation la moins efficace.
+On remarque également que Roy-Warshall 1 Bis est l'implémentation la moins efficace.
 
 Cependant, si on zoome dans le diagramme, on peut voir que Roy-Warshall 1 bis est très légèrement plus efficace que Roy-Warshall 1 pour des graphs avec des sommets allant de 1 à 7/8.
 
 ![Figure2](/tp1/figure2.png?raw=true)
 
-Le diagramme peut être visualié en exécutant les commandes suivantes dans un terminal (sur linux) :
+Le diagramme peut être visualisé en exécutant les commandes suivantes dans un terminal (sur Linux) :
 
 ```bash
 python3 -m venv venv # création d'un environnement virtuel pour installer la bibliothèque matplotlib
