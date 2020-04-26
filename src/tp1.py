@@ -1,47 +1,18 @@
 import sys
 from typing import List, Tuple
 
-import matplotlib.pyplot as plt
-
-from src.performance import get_n_exec_time
-from src.utils import adjacency_list_to_adjacency_matrix
-
-""" ---------- Plot Roy Warshall exec times ---------- """
+from src.performance import plot_performances
+from src.utils import adjacency_list_to_adjacency_matrix, generate_adjacency_list
 
 
 def main() -> None:
-    min_graph_size = 1
-    max_graph_size = 21
-    number_of_executions = 1000
-
-    print("{} executions".format(number_of_executions))
-
-    line1 = []
-    line2 = []
-    line3 = []
-
-    for i in range(min_graph_size, max_graph_size):
-        sys.stdout.write('{0:.1f}% processed ({1} vertices) \r'.format(i / max_graph_size * 100, i))
-        sys.stdout.flush()
-
-        line1.append(get_n_exec_time(roy_warshall_1, number_of_executions, i))
-        line2.append(get_n_exec_time(roy_warshall_1_bis, number_of_executions, i))
-        line3.append(get_n_exec_time(roy_warshall_2, number_of_executions, i))
-
-    sys.stdout.write('100% processed ({} vertices) \r'.format(max_graph_size - 1))
-    vertices_number = [*range(1, max_graph_size)]
-
-    plt.plot(vertices_number, line1, label='Roy Warshall 1')
-    plt.plot(vertices_number, line2, label='Roy Warshall 1 Bis')
-    plt.plot(vertices_number, line3, label='Roy Warshall 2')
-
-    plt.grid()
-
-    plt.ylabel('Average exec time (in µs)')
-    plt.xlabel('Number of vertices')
-    plt.title('Average exec time of the 3 different Roy Warshall algorithms ({} execs)'.format(number_of_executions))
-    plt.legend()
-    plt.show()
+    functions_to_plot = [roy_warshall_1, roy_warshall_1_bis, roy_warshall_2]
+    graph_labels = {
+        'title': 'Average exec time of the 3 different Roy Warshall algorithms',
+        'xlabel': 'Number of vertices',
+        'ylabel': 'Average exec time (in seconds)',
+    }
+    plot_performances(sys.argv, functions_to_plot, graph_labels, generate_adjacency_list)
 
 
 """ ---------- Roy Warshall Algorithm ---------- """

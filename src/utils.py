@@ -1,5 +1,18 @@
+import sys
 from random import randrange, sample
-from typing import List
+from typing import List, Tuple
+
+
+def check_args(args: List[str]) -> Tuple[int, int, int]:
+    if len(args) != 4:
+        sys.exit("Usage : <min_graph_size> <max_graph_size> <number_of_executions>")
+
+    min_graph_size = int(args[1])
+    max_graph_size = int(args[2]) + 1
+    number_of_executions = int(args[3])
+    if min_graph_size < 1 or max_graph_size < min_graph_size or number_of_executions < 1:
+        sys.exit("Invalid arguments.")
+    return min_graph_size, max_graph_size, number_of_executions
 
 
 def generate_adjacency_list(vertices_number: int) -> List[List[int]]:

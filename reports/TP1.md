@@ -181,9 +181,9 @@ Fonction génèreGraph (nbSommets)
 Fin génèreGraph
 ```
 
-Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphs aléatoires dont la taille augmente progressivement de a à b, b non compris.
+Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphs aléatoires dont la taille augmente progressivement de a à b, b compris.
 
-Exemple ci-dessous, avec n = 1000, a = 1, b = 101 (la taille des graphs générés varie de 1 à 100)
+Exemple ci-dessous, avec n = 1000, a = 1 et b = 100
 
 ![Figure1](../figures/figure1.png?raw=true)
 
@@ -200,13 +200,7 @@ Le diagramme peut être visualisé en exécutant les commandes suivantes dans un
 python3 -m venv venv # création d'un environnement virtuel pour installer la bibliothèque matplotlib
 source venv/bin/activate # activation de l'environnement virtuel
 pip3 install matplotlib # installation de la bibliothèque Python matplotlib
-python3 -m src.tp1 # exécution du script Python qui génère les diagrammes
+python3 -m src.tp1 1 100 1000 # exécution du script Python, 1 = sommet de départ, 100 = sommet d'arrivée, 1000 = nombre d'exécutions des algos
 ```
-Les paramètres d'exécution peuvent être modifiées au début du fichier `src/tp1.py` :
 
-```python
-def main() -> None:
-    min_graph_size = 1 # i
-    max_graph_size = 21 # j, la taille des graph générés va varier de 1 à 20
-    number_of_executions = 10000 #n, nombre d'exécutions
-```
+Le script prend en paramètres le nombre de sommets de départ, le nombre de sommets d'arrivée et le nombre d'exécution des algorithmes à chaque fois que le nombre de sommets augmente.

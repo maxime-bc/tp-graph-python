@@ -1,19 +1,19 @@
+import sys
 from operator import itemgetter
 from typing import List
 
-from src.utils import print_adjacency_matrix_csv, adjacency_list_to_adjacency_matrix, \
-    generate_adjacency_list_without_cycles
+from src.performance import plot_performances
+from src.utils import generate_adjacency_list_without_cycles
 
 
 def main():
-    # graph = [[1, 2], [2], [3], [4], []]
-    # graph = [[1, 2], [2], [3], [4, 5], [], [6], []]
-    # print(grundy(graph))
-
-    for i in range(1):
-        print_adjacency_matrix_csv(adjacency_list_to_adjacency_matrix(generate_adjacency_list_without_cycles(8)))
-
-    # print(adjacency_list_to_adjacency_matrix(generate_adjacency_list_without_cycles(5)))
+    functions_to_plot = [grundy]
+    graph_labels = {
+        'title': 'Average exec time of grundy value algorithm',
+        'xlabel': 'Number of vertices',
+        'ylabel': 'Average exec time (in seconds)',
+    }
+    plot_performances(sys.argv, functions_to_plot, graph_labels, generate_adjacency_list_without_cycles)
 
 
 def leveling(adjacency_list: List[List[int]]) -> List[int]:
@@ -31,7 +31,7 @@ def leveling(adjacency_list: List[List[int]]) -> List[int]:
             for k in range(len(adjacency_list[j])):
 
                 if adjacency_list[j][k] == no_successor_vertices[i]:
-                    no_successor_vertices.append(j)
+                    no_successor_vertices.append(j)  # <-- bug here
 
                     if graph_leveling[j] < (graph_leveling[no_successor_vertices[i]] + 1):
                         graph_leveling[j] = graph_leveling[no_successor_vertices[i]] + 1
