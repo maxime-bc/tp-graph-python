@@ -183,26 +183,26 @@ Fin génèreGraph
 
 Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphs aléatoires dont la taille augmente progressivement de a à b, b non compris.
 
-Exemple ci-dessous, avec n = 1000, a = 1, b = 21 (la taille des graphs générés varie de 1 à 20)
+Exemple ci-dessous, avec n = 1000, a = 1, b = 101 (la taille des graphs générés varie de 1 à 100)
 
-![Figure1](/tp1/figure1.png?raw=true)
+![Figure1](../figures/figure1.png?raw=true)
 
 On peut voir sur le diagramme ci-dessous que l'algorithme le plus efficace est Roy-Warshall 2 (environ 2 fois plus efficace que Roy-Warshall 1).
 On remarque également que Roy-Warshall 1 Bis est l'implémentation la moins efficace.
 
 Cependant, si on zoome dans le diagramme, on peut voir que Roy-Warshall 1 bis est très légèrement plus efficace que Roy-Warshall 1 pour des graphs avec des sommets allant de 1 à 7/8.
 
-![Figure2](/tp1/figure2.png?raw=true)
+![Figure2](../figures/figure2.png?raw=true)
 
-Le diagramme peut être visualisé en exécutant les commandes suivantes dans un terminal (sur Linux) :
+Le diagramme peut être visualisé en exécutant les commandes suivantes dans un terminal à l'intérieur du dossier racine (sur Linux) :
 
 ```bash
 python3 -m venv venv # création d'un environnement virtuel pour installer la bibliothèque matplotlib
 source venv/bin/activate # activation de l'environnement virtuel
 pip3 install matplotlib # installation de la bibliothèque Python matplotlib
-python3 tp1/src/graph.py # exécution du script Python qui génère les diagrammes
+python3 -m src.tp1 # exécution du script Python qui génère les diagrammes
 ```
-Les paramètres d'exécution peuvent être modifiées au début du fichier `tp1/src/graph.py` :
+Les paramètres d'exécution peuvent être modifiées au début du fichier `src/tp1.py` :
 
 ```python
 def main() -> None:

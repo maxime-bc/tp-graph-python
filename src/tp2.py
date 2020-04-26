@@ -1,11 +1,19 @@
 from operator import itemgetter
 from typing import List
 
+from src.utils import print_adjacency_matrix_csv, adjacency_list_to_adjacency_matrix, \
+    generate_adjacency_list_without_cycles
+
 
 def main():
     # graph = [[1, 2], [2], [3], [4], []]
-    graph = [[1, 2], [2], [3], [4, 5], [], [6], []]
-    print(grundy(graph))
+    # graph = [[1, 2], [2], [3], [4, 5], [], [6], []]
+    # print(grundy(graph))
+
+    for i in range(1):
+        print_adjacency_matrix_csv(adjacency_list_to_adjacency_matrix(generate_adjacency_list_without_cycles(8)))
+
+    # print(adjacency_list_to_adjacency_matrix(generate_adjacency_list_without_cycles(5)))
 
 
 def leveling(adjacency_list: List[List[int]]) -> List[int]:

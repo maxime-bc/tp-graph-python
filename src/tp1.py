@@ -1,9 +1,10 @@
 import sys
-from timeit import default_timer
 from typing import List, Tuple
-from random import randrange, sample
-from statistics import mean
+
 import matplotlib.pyplot as plt
+
+from src.performance import get_n_exec_time
+from src.utils import adjacency_list_to_adjacency_matrix
 
 """ ---------- Plot Roy Warshall exec times ---------- """
 
@@ -43,25 +44,6 @@ def main() -> None:
     plt.show()
 
 
-""" ---------- Performance Tests ---------- """
-
-
-def get_exec_time(function, *args):
-    start = default_timer()
-    function(*args)
-    return default_timer() - start
-
-
-def get_n_exec_time(algorithm, n, size):
-    exec_times = []
-
-    for i in range(n):
-        adjacency_list = generate_adjacency_list(size)
-        exec_times.append(get_exec_time(algorithm, adjacency_list))
-
-    return mean(exec_times) * 10 ** 6  # Convert seconds to microseconds
-
-
 """ ---------- Roy Warshall Algorithm ---------- """
 
 
@@ -69,9 +51,9 @@ def roy_warshall_1(adjacency_list: List[List[int]]) -> List[List[int]]:
     # here we convert the adjacency list to an adjacency matrix
     matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
     vertices_number = len(adjacency_list)
-    for k in range(0, vertices_number):
-        for i in range(0, vertices_number):
-            for j in range(0, vertices_number):
+    for k in range(vertices_number):
+        for i in range(vertices_number):
+            for j in range(vertices_number):
                 matrix[i][j] = matrix[i][j] or (matrix[i][k] and matrix[k][j])
 
     return matrix
@@ -80,10 +62,10 @@ def roy_warshall_1(adjacency_list: List[List[int]]) -> List[List[int]]:
 # Another implementation of Roy Warshall's algorithm, more efficient than roy_warshall_1
 def roy_warshall_1_bis(adjacency_list: List[List[int]]) -> List[List[int]]:
     matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
-    for i in range(0, len(matrix)):
-        for j in range(0, len(matrix[i])):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
             if matrix[i][j] == 1:
-                for x in range(0, len(matrix[j])):
+                for x in range(len(matrix[j])):
                     if matrix[j][x] == 1:
                         matrix[i][x] = matrix[j][x]
     return matrix
@@ -152,65 +134,6 @@ def depth_first_search(adjacency_list: List[List[int]]) -> Tuple[List[int], List
         component.reverse()
 
     return res_visit_stack, scc
-
-
-""" ---------- Utility functions ---------- """
-
-
-def generate_adjacency_list(vertices_number):
-    adjacency_list = [[] for i in range(vertices_number)]
-
-    for i in range(vertices_number):
-        # actual vertex can be linked to itself
-        successors_number = randrange(vertices_number + 1)
-        adjacency_list[i].extend(sample(range(vertices_number), successors_number))
-
-    return adjacency_list
-
-
-def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[List[int]]:
-    vertices_number = len(adjacency_list)
-    matrix = [[0 for x in range(vertices_number)] for x in range(vertices_number)]
-
-    for i in range(0, len(adjacency_list)):
-        for j in range(0, len(adjacency_list[i])):
-            matrix[i][adjacency_list[i][j]] = 1
-
-    return matrix
-
-
-def transpose_adjacency_list(adjacency_list: List[List[int]]) -> List[List[int]]:
-    vertices_number = len(adjacency_list)
-    transposed_adjacency_list = [[] for i in range(vertices_number)]
-
-    for i in range(vertices_number):
-        for j in range(len(adjacency_list[i])):
-            transposed_adjacency_list[adjacency_list[i][j]].append(i)
-
-    return transposed_adjacency_list
-
-
-def print_matrix(matrix: List[List[int]]) -> None:
-    print('    ', end='')
-    for i in range(0, len(matrix)):
-        print(i, end=' ')
-
-    print('\n', end='')
-    print('    ', end='')
-
-    for i in range(0, len(matrix)):
-        print('_', end=' ')
-
-    print('\n', end='')
-
-    i = 0
-    for row in matrix:
-        print('{} |'.format(i), end=' ')
-        for val in row:
-            print(val, end=' ')
-        print('\n', end='')
-        i += 1
-    print('')
 
 
 if __name__ == "__main__":
