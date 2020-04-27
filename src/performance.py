@@ -12,15 +12,20 @@ def plot_performances(args: List[str], functions, labels: Dict[str, str], graph_
     min_graph_size, max_graph_size, number_of_executions = check_args(args)
     print("{} execution(s)".format(number_of_executions))
     lines = [[] for i in range(len(functions))]
+    counter = 0
 
     for i in range(min_graph_size, max_graph_size):
-        sys.stdout.write('{0:.1f}% processed ({1} vertices) \r'.format((i + 1) / max_graph_size * 100, i))
+        sys.stdout.write(
+            '{0:.1f}% processed (w/ {1} vertices) \r'.format((counter + 1) / (max_graph_size - min_graph_size) * 100,
+                                                             i))
         sys.stdout.flush()
 
         for j in range(len(functions)):
             lines[j].append(get_n_exec_time(functions[j], number_of_executions, graph_generation(i)))
 
-    vertices_number = [*range(1, max_graph_size)]
+        counter += 1
+
+    vertices_number = [*range(min_graph_size, max_graph_size)]
 
     for k in range(len(functions)):
         line_label = functions[k].__name__

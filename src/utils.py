@@ -8,15 +8,15 @@ def check_args(args: List[str]) -> Tuple[int, int, int]:
         sys.exit("Usage : <min_graph_size> <max_graph_size> <number_of_executions>")
 
     min_graph_size = int(args[1])
-    max_graph_size = int(args[2]) + 1
+    max_graph_size = int(args[2])
     number_of_executions = int(args[3])
-    if min_graph_size < 1 or max_graph_size < min_graph_size or number_of_executions < 1:
+    if min_graph_size < 1 or max_graph_size <= min_graph_size or number_of_executions < 1:
         sys.exit("Invalid arguments.")
-    return min_graph_size, max_graph_size, number_of_executions
+    return min_graph_size, max_graph_size + 1, number_of_executions
 
 
 def generate_adjacency_list(vertices_number: int) -> List[List[int]]:
-    adjacency_list = [[] for i in range(vertices_number)]
+    adjacency_list = [[] for _ in range(vertices_number)]
 
     for i in range(vertices_number):
         # actual vertex can be linked to itself
@@ -27,7 +27,7 @@ def generate_adjacency_list(vertices_number: int) -> List[List[int]]:
 
 
 def generate_adjacency_list_without_cycles(vertices_number: int) -> List[List[int]]:
-    adjacency_list = [[] for i in range(vertices_number)]
+    adjacency_list = [[] for _ in range(vertices_number)]
 
     for i in range(vertices_number):
         successors_number = randrange(vertices_number - i)
@@ -49,7 +49,7 @@ def print_adjacency_matrix_csv(adjacency_matrix: List[List[int]]) -> None:
 
 def adjacency_list_to_adjacency_matrix(adjacency_list: List[List[int]]) -> List[List[int]]:
     vertices_number = len(adjacency_list)
-    matrix = [[0 for x in range(vertices_number)] for x in range(vertices_number)]
+    matrix = [[0 for _ in range(vertices_number)] for _ in range(vertices_number)]
 
     for i in range(len(adjacency_list)):
         for j in range(len(adjacency_list[i])):
