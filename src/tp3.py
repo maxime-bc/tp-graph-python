@@ -1,6 +1,6 @@
 from typing import List
 
-from src.utils import adjacency_list_to_adjacency_matrix, get_vertices_degree
+from src.utils import adjacency_list_to_adjacency_matrix
 
 
 def main():
@@ -36,16 +36,13 @@ def welsh_powell(adjacency_list: List[List[int]]) -> List[int]:
     vertices_num = len(adjacency_list)
     vertices_color = [0 for i in range(vertices_num)]
 
-    # vertices_degree = sorted(get_vertices_degree(adjacency_list), key=itemgetter(1), reverse=True)
-    vertices_degree = get_vertices_degree(adjacency_list)
-
     for j in range(vertices_num):
         for i in range(vertices_num):
-            vertex_neighbours = _get_vertex_neighbours(vertices_degree[i][0], adjacency_list)
+            if vertices_color[i] == 0:
 
-            if vertices_color[vertices_degree[i][0]] == 0:
+                vertex_neighbours = _get_vertex_neighbours(i, adjacency_list)
                 if _check_neighbours_color(color, vertex_neighbours, vertices_color):
-                    vertices_color[vertices_degree[i][0]] = color
+                    vertices_color[i] = color
 
         color += 1
 
