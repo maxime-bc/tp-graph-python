@@ -69,6 +69,26 @@ def transpose_adjacency_list(adjacency_list: List[List[int]]) -> List[List[int]]
     return transposed_adjacency_list
 
 
+def get_vertices_degree(adjacency_list: List[List[int]]):
+    # 0: vertex index
+    # 1: vertex degree
+
+    vertices_degree = [[0, 0] for i in range(len(adjacency_list))]
+
+    for i in range(len(adjacency_list)):
+        for j in range(len(adjacency_list[i])):
+            vertices_degree[adjacency_list[i][j]][0] = adjacency_list[i][j]
+            vertices_degree[adjacency_list[i][j]][1] += 1
+
+    return vertices_degree
+
+
+# def adjacency_list_to_line_list(adjacency_list: List[List[int]]):
+#
+#     line_list = [[] for i in range(len(adjacency_list))]
+#
+#     for i in range(len(adjacency_list)):
+
 def print_adjacency_matrix(adjacency_matrix: List[List[int]]) -> None:
     print('    ', end='')
     for i in range(len(adjacency_matrix)):
