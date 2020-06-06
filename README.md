@@ -3,3 +3,4 @@ Pierre BRUOT et Maxime BLANCHON
 
 ### [TP1 : Implantation d'algorithmes en Python](reports/TP1.md)
 ### [TP2 : Algorithmes dans les graphes sans circuits](reports/TP2.md)
+### [TP3 : Coloration de graphes](reports/TP3.md)

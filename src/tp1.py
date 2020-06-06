@@ -30,7 +30,6 @@ def roy_warshall_1(adjacency_list: List[List[int]]) -> List[List[int]]:
     return matrix
 
 
-# Another implementation of Roy Warshall's algorithm, more efficient than roy_warshall_1
 def roy_warshall_1_bis(adjacency_list: List[List[int]]) -> List[List[int]]:
     matrix = adjacency_list_to_adjacency_matrix(adjacency_list)
     for i in range(len(matrix)):
