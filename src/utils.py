@@ -83,6 +83,31 @@ def get_vertices_degree(adjacency_list: List[List[int]]):
     return vertices_degree
 
 
+def adjacency_list_to_line_graph_list(adjacency_list: List[List[int]]) -> List[List[int]]:
+    vertices_num = len(adjacency_list)
+    lines_list = []
+
+    for i in range(vertices_num):
+        for j in range(len(adjacency_list[i])):
+            vertex_to_add = [i, adjacency_list[i][j]]
+            reversed_vertex_to_add = [adjacency_list[i][j], i]
+
+            if reversed_vertex_to_add not in lines_list:
+                lines_list.append(vertex_to_add)
+
+    lines_list_len = len(lines_list)
+    adjacency_lines_list = [[] for i in range(lines_list_len)]
+
+    for i in range(lines_list_len):
+        for j in range(lines_list_len):
+
+            if lines_list[i] != lines_list[j]:
+                if lines_list[i][0] in lines_list[j] or lines_list[i][1] in lines_list[j]:
+                    adjacency_lines_list[i].extend([j])
+
+    return adjacency_lines_list
+
+
 def print_adjacency_matrix(adjacency_matrix: List[List[int]]) -> None:
     print('    ', end='')
     for i in range(len(adjacency_matrix)):
