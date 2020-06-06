@@ -96,16 +96,16 @@ def adjacency_list_to_line_graph_list(adjacency_list: List[List[int]]) -> List[L
                 lines_list.append(vertex_to_add)
 
     lines_list_len = len(lines_list)
-    adjacency_lines_list = [[] for i in range(lines_list_len)]
+    line_graph_adjacency_list = [[] for i in range(lines_list_len)]
 
     for i in range(lines_list_len):
         for j in range(lines_list_len):
 
             if lines_list[i] != lines_list[j]:
                 if lines_list[i][0] in lines_list[j] or lines_list[i][1] in lines_list[j]:
-                    adjacency_lines_list[i].extend([j])
+                    line_graph_adjacency_list[i].extend([j])
 
-    return adjacency_lines_list
+    return line_graph_adjacency_list
 
 
 def print_adjacency_matrix(adjacency_matrix: List[List[int]]) -> None:

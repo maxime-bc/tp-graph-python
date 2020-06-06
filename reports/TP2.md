@@ -12,8 +12,8 @@ Cet algorithme prend en paramètre une liste d'ajacence et renvoie une liste con
 Fonction MiseEnNiveau (listeAdj)
 
     nbSommets := taille(listeAdj)
-    sommetsSansSuccesseurs := Tableau de tous les sommets de listAdj n'ayant pas de successeurs
-    niveaux := Tableau initialisé à 0
+    sommetsSansSuccesseurs := Tableau vide
+    niveaux := Tableau de taille(nbSommets) initialisé à 0
     i := 0
 
     Tant que i < taille(sommetsSansSuccesseurs)

@@ -42,13 +42,12 @@ def welsh_powell_1(adjacency_list: List[List[int]]) -> List[int]:
 
     vertices_degree = sorted(get_vertices_degree(adjacency_list), key=itemgetter(1), reverse=True)
 
-    for j in range(vertices_num):
-        for i in range(vertices_num):
-            vertex_neighbours = _get_vertex_neighbours(vertices_degree[i][0], adjacency_list)
-
-            if vertices_color[vertices_degree[i][0]] == 0:
-                if _check_neighbours_color(color, vertex_neighbours, vertices_color):
-                    vertices_color[vertices_degree[i][0]] = color
+    for i in range(vertices_num):
+        for j in range(vertices_num):
+            if vertices_color[vertices_degree[j][0]] == 0 and \
+                    _check_neighbours_color(color, _get_vertex_neighbours(vertices_degree[j][0], adjacency_list),
+                                            vertices_color):
+                vertices_color[vertices_degree[j][0]] = color
 
         color += 1
 
@@ -62,13 +61,11 @@ def welsh_powell_2(adjacency_list: List[List[int]]) -> List[int]:
     vertices_num = len(adjacency_list)
     vertices_color = [0 for i in range(vertices_num)]
 
-    for j in range(vertices_num):
-        for i in range(vertices_num):
-            if vertices_color[i] == 0:
-
-                vertex_neighbours = _get_vertex_neighbours(i, adjacency_list)
-                if _check_neighbours_color(color, vertex_neighbours, vertices_color):
-                    vertices_color[i] = color
+    for i in range(vertices_num):
+        for j in range(vertices_num):
+            if vertices_color[j] == 0 and \
+                    _check_neighbours_color(color, _get_vertex_neighbours(j, adjacency_list), vertices_color):
+                vertices_color[j] = color
 
         color += 1
 
