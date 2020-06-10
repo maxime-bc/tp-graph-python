@@ -164,24 +164,24 @@ Fin démarrerParcoursEnProfondeur
 
 ### Jeux d'essais
 
-Afin de comparer la performance des différentes implémentations de Roy-Warshall, nous avons écrit une fonction qui génère des graphs aléatoirement.
+Afin de comparer la performance des différentes implémentations de Roy-Warshall, nous avons écrit une fonction qui génère des graphes aléatoirement.
 
 ```
-Fonction génèreGraph (nbSommets)
+Fonction génèreGraphe (nbSommets)
 
-  graph := liste contenant nbSommets sous-listes vides
+  graphe := liste contenant nbSommets sous-listes vides
   
   Pour i allant de 0 à nbSommets-1
     nbSuccesseurs := nombre aléatoire supérieur ou égal à 0 et inférieur ou égal à nbSommets
-    On ajoute un nombre aléatoire de successeurs compris entre 0 à nbSommets dans graph[i]
+    On ajoute un nombre aléatoire de successeurs compris entre 0 à nbSommets dans graphe[i]
   Fin Pour
   
-  Retourner graph
+  Retourner graphe
   
-Fin génèreGraph
+Fin génèreGraphe
 ```
 
-Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphs aléatoires dont la taille augmente progressivement de a à b, b compris.
+Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphes aléatoires dont la taille augmente progressivement de a à b, b compris.
 
 Exemple ci-dessous, avec n = 1000, a = 1 et b = 100
 
@@ -190,7 +190,7 @@ Exemple ci-dessous, avec n = 1000, a = 1 et b = 100
 On peut voir sur le diagramme ci-dessous que l'algorithme le plus efficace est Roy-Warshall 2 (environ 2 fois plus efficace que Roy-Warshall 1).
 On remarque également que Roy-Warshall 1 Bis est l'implémentation la moins efficace.
 
-Cependant, si on zoome dans le diagramme, on peut voir que Roy-Warshall 1 bis est très légèrement plus efficace que Roy-Warshall 1 pour des graphs avec des sommets allant de 1 à 7/8.
+Cependant, si on zoome dans le diagramme, on peut voir que Roy-Warshall 1 bis est très légèrement plus efficace que Roy-Warshall 1 pour des graphes avec des sommets allant de 1 à 7/8.
 
 ![Figure2](../figures/figure2.png?raw=true)
 

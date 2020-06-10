@@ -4,7 +4,7 @@ Pierre BRUOT et Maxime BLANCHON
 
 ### Coloration des sommets
 
-L'algorithme de Welsh Powell est un algorithme de coloration de sommets. C'est un algorithme heuristique, c'est à dire qu'il ne permet pas de colorier les sommets d'un graph de façon optimale.
+L'algorithme de Welsh Powell est un algorithme de coloration de sommets. C'est un algorithme heuristique, c'est à dire qu'il ne permet pas de colorier les sommets d'un graphe de façon optimale.
 
 Cet algorithme prend en paramètre une liste d’adjacence et renvoie une liste contenant la couleur du sommet à l'index i, représentée par un entier.
 
@@ -12,23 +12,23 @@ Avec WelshPowell1, les sommets sont triés selon leur degré avant d'être parco
 
 ![graph1](../figures/graph1.png?raw=true)
 
-Pour obtenir la coloration maximale des sommets sur le graph ci-dessus avec l'algorithme de Welsh Powell,
+Pour obtenir la coloration maximale des sommets sur le graphe ci-dessus avec l'algorithme de Welsh Powell,
 il suffit de renommer les sommets comme montré ci-dessous :
 
 ![graph2](../figures/graph2.png?raw=true)
 
-La coloration optimale de ce graph comporte deux couleurs.
+La coloration optimale de ce graphe comporte deux couleurs.
 
 ---
 
 ![graph3](../figures/graph3.png?raw=true)
 
-Pour obtenir la coloration maximale des sommets sur le graph ci-dessus avec l'algorithme de Welsh Powell,
+Pour obtenir la coloration maximale des sommets sur le graphe ci-dessus avec l'algorithme de Welsh Powell,
 il suffit de renommer les sommets comme montré ci-dessous :
 
 ![graph4](../figures/graph4.png?raw=true)
 
-La coloration optimale de ce graph comporte deux couleurs.
+La coloration optimale de ce graphe comporte deux couleurs.
 
 #### Pseudo-code
 
@@ -75,7 +75,7 @@ Fin WelshPowell
 
 ### Graphe des arêtes
 
-Soit G un graph.
+Soit G un graphe.
 Soit A(G) le graphe des arêtes de G.
 
 Chaque sommet de A(G) représente une arête de G et deux sommets de A(G) sont adjacents si et seulement si les arêtes de G correspondantes sont adjacentes.
@@ -116,7 +116,7 @@ Fin créationLineGraphe
 ### Coloration des arêtes d’un graphe
 
 Cet algorithme colorie, de façon heuristique, les arêtes d’un graphe.
-Pour une liste d'adjacence donnée, il génère le graph d'arêtes correspondant et le colorie avec l'algorithme de Welsh Powell.
+Pour une liste d'adjacence donnée, il génère le graphe d'arêtes correspondant et le colorie avec l'algorithme de Welsh Powell.
 
 #### Pseudo-code
 

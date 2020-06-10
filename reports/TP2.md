@@ -2,9 +2,9 @@ Pierre BRUOT et Maxime BLANCHON
 # Théorie des graphes 
 ## TP2 : Algorithmes dans les graphes sans circuits
 
-### Mise en niveau des sommets du graph
+### Mise en niveau des sommets du graphe
 
-Cet algorithme prend en paramètre une liste d'ajacence et renvoie une liste contenant les niveaux de chaque sommet d'un graphe sans circuit.
+Cet algorithme prend en paramètre une liste d’adjacence et renvoie une liste contenant les niveaux de chaque sommet d'un graphe sans circuit.
 
 #### Pseudo-code
 
@@ -37,14 +37,14 @@ Fonction MiseEnNiveau (listeAdj)
 Fin MiseEnNiveau
 ```
 
-### Création d'une liste d'assocation
+### Création d'une liste d'association
 
 La liste d'association est une liste de liste d'entiers qui permet d'associer un sommet à son niveau. \
  Chaque sous-liste de la liste d'association se compose de 2 entiers : \
  1 - le numéro du sommet \
  2 - son niveau 
  
-La création de cette liste d'association est intermédiaire et permet par la suite d'appliquer la fonction de Grundy à chaque sommet d'un graph.
+La création de cette liste d'association est intermédiaire et permet par la suite d'appliquer la fonction de Grundy à chaque sommet d'un graphe.
 
 #### Pseudo-code
 ```
@@ -62,7 +62,7 @@ Fonction CréationDeLaListeD'association (listeAdj)
 Fin CréationDeLaListeD'association
 ```
 
-### Fonction de grundy
+### Fonction de Grundy
 
 Cet algorithme prend en paramètre une liste d'adjacence et retourne une liste contenant le chiffre de Grundy pour chaque sommet du graphe.
 
@@ -71,11 +71,11 @@ Cet algorithme prend en paramètre une liste d'adjacence et retourne une liste c
 ```
 Fonction Grundy (listeAdj)
     
-    Fonction trouverLaValeurDeGrundy (liste, élement)
+    Fonction trouverLaValeurDeGrundy (liste, élément)
         
         valeurDeGrundy := -1
         Pour chaque sous-liste dans liste
-            Si élement est égal au sommet de la sous-liste alors
+            Si élément est égal au sommet de la sous-liste alors
                 valeurDeGrundy := niveau de la sous-liste
                 On sort de la boucle
             Fin Si
