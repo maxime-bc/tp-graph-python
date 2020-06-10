@@ -31,7 +31,7 @@ def leveling(adjacency_list: List[List[int]]) -> List[int]:
             for k in range(len(adjacency_list[j])):
 
                 if adjacency_list[j][k] == no_successor_vertices[i]:
-                    no_successor_vertices.append(j)  # <-- bug here
+                    no_successor_vertices.append(j)  # <-- à optimiser ?
 
                     if graph_leveling[j] < (graph_leveling[no_successor_vertices[i]] + 1):
                         graph_leveling[j] = graph_leveling[no_successor_vertices[i]] + 1

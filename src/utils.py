@@ -36,6 +36,24 @@ def generate_adjacency_list_without_cycles(vertices_number: int) -> List[List[in
     return adjacency_list
 
 
+def generate_undirected_adjacency_list(vertices_number: int) -> List[List[int]]:
+    adjacency_list = [[] for _ in range(vertices_number)]
+
+    for i in range(vertices_number):
+        # actual vertex can be linked to itself
+        successors_number = randrange(vertices_number + 1)
+        random_successors = sample(range(vertices_number), successors_number)
+        adjacency_list[i].extend(random_successors)
+
+        for j in range(successors_number):
+            if random_successors[j] != i:
+                adjacency_list[random_successors[j]].extend([i])
+
+        adjacency_list[i] = list(set(adjacency_list[i]))
+
+    return adjacency_list
+
+
 def print_adjacency_matrix_csv(adjacency_matrix: List[List[int]]) -> None:
     vertices_number = len(adjacency_matrix)
     for i in range(vertices_number):

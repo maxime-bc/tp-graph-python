@@ -1,18 +1,20 @@
+import sys
 from operator import itemgetter
 from typing import List
 
-from src.utils import adjacency_list_to_adjacency_matrix, get_vertices_degree, adjacency_list_to_line_graph_list
+from src.performance import plot_performances
+from src.utils import adjacency_list_to_adjacency_matrix, get_vertices_degree, adjacency_list_to_line_graph_list, \
+    generate_undirected_adjacency_list
 
 
 def main():
-    # graph = [[1, 2], [2], [3], [4], []]
-    # graph = [[1], [0, 2], [1, 3], [2]]
-    # graph = [[3, 5, 7], [6, 2, 4], [5, 7, 1], [0, 4, 6], [1, 3, 7], [0, 2, 6], [1, 3, 5], [0, 2, 4]]
-    # graph = [[5, 6, 7], [4, 6, 7], [4, 5, 7], [4, 5, 6], [1, 2, 3], [0, 2, 3], [0, 1, 3], [0, 1, 2]]
-    graph = [[1, 2, 3], [0, 3], [0, 3], [0, 1, 2]]
-    # print(welsh_powell_1(graph))
-    # print(welsh_powell_2(graph))
-    print(color_edges(graph))
+    functions_to_plot = [welsh_powell_1, welsh_powell_2]
+    graph_labels = {
+        'title': 'Average exec time of Welsh Powell algorithm',
+        'xlabel': 'Number of vertices',
+        'ylabel': 'Average exec time (in seconds)',
+    }
+    plot_performances(sys.argv, functions_to_plot, graph_labels, generate_undirected_adjacency_list)
 
 
 def _get_vertex_neighbours(vertex: int, adjacency_list: List[List[int]]) -> List[int]:

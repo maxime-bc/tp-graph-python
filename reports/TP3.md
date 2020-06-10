@@ -4,7 +4,31 @@ Pierre BRUOT et Maxime BLANCHON
 
 ### Coloration des sommets
 
-...
+L'algorithme de Welsh Powell est un algorithme de coloration de sommets. C'est un algorithme heuristique, c'est à dire qu'il ne permet pas de colorier les sommets d'un graph de façon optimale.
+
+Cet algorithme prend en paramètre une liste d’adjacence et renvoie une liste contenant la couleur du sommet à l'index i, représentée par un entier.
+
+Avec WelshPowell1, les sommets sont triés selon leur degré avant d'être parcourus pour leur appliquer une couleur tandis qu'avec WelshPowell2 ils sont parcourus selon leur ordre dans la liste d'adjacence.
+
+![graph1](../figures/graph1.png?raw=true)
+
+Pour obtenir la coloration maximale des sommets sur le graph ci-dessus avec l'algorithme de Welsh Powell,
+il suffit de renommer les sommets comme montré ci-dessous :
+
+![graph2](../figures/graph2.png?raw=true)
+
+La coloration optimale de ce graph comporte deux couleurs.
+
+---
+
+![graph3](../figures/graph3.png?raw=true)
+
+Pour obtenir la coloration maximale des sommets sur le graph ci-dessus avec l'algorithme de Welsh Powell,
+il suffit de renommer les sommets comme montré ci-dessous :
+
+![graph4](../figures/graph4.png?raw=true)
+
+La coloration optimale de ce graph comporte deux couleurs.
 
 #### Pseudo-code
 
@@ -49,14 +73,19 @@ Fonction WelshPowell2 (listeAdj)
 Fin WelshPowell
 ```
 
-### Graphe des arrêtes
+### Graphe des arêtes
 
-...
+Soit G un graph.
+Soit A(G) le graphe des arêtes de G.
+
+Chaque sommet de A(G) représente une arête de G et deux sommets de A(G) sont adjacents si et seulement si les arêtes de G correspondantes sont adjacentes.
+
+CréationGrapheArêtes prend en argument la liste d'adjacence représentant le graphe G et renvoie une liste d'adjacence représentant le graphe des arêtes de G, A(G).
 
 #### Pseudo-code
 
 ```
-Fonction CréationLineGraph (listeAdj)
+Fonction CréationGrapheArêtes (listeAdj)
     
     nbSommets := taille(listeAdj)
     listeDesArêtes := Liste initialisée à vide
@@ -69,29 +98,30 @@ Fonction CréationLineGraph (listeAdj)
         Fin Pour
     Fin Pour
 
-    listeAdjLineGraph := initialisé avec taille(listeDesArêtes) sous-listes vides
+    listeAdjLineGraphe := initialisé avec taille(listeDesArêtes) sous-listes vides
 
     Pour i allant de 0 à taille(listeDesArêtes)
         Pour j allant de 0 à taille(listeDesArêtes)
             Si listeDesArêtes[i] != listeDesArêtes[j] alors
                 Si l'un des deux sommets liés par listeDesArêtes[i] est dans listeDesArêtes[j] alors
-                     On ajoute j dans listeAdjLineGraph[i]
+                     On ajoute j dans listeAdjLineGraphe[i]
                 Fin Si
         Fin Pour
     Fin Pour
 
-    Retourner listeAdjLineGraph
-Fin créationLineGraph
+    Retourner listeAdjLineGraphe
+Fin créationLineGraphe
 ```
 
 ### Coloration des arêtes d’un graphe
 
-...
+Cet algorithme colorie, de façon heuristique, les arêtes d’un graphe.
+Pour une liste d'adjacence donnée, il génère le graph d'arêtes correspondant et le colorie avec l'algorithme de Welsh Powell.
 
 #### Pseudo-code
 
 ```
-Fonction colorationArêtesGraph (listeAdj)
-    Retourner WelshPowell2(CréationLineGraph(listeAdj))
-Fin colorationArêtesGraph
+Fonction colorationArêtesGraphe (listeAdj)
+    Retourner WelshPowell2(CréationGrapheArêtes(listeAdj))
+Fin colorationArêtesGraphe
 ```
