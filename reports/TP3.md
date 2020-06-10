@@ -30,6 +30,41 @@ il suffit de renommer les sommets comme montré ci-dessous :
 
 La coloration optimale de ce graphe comporte deux couleurs.
 
+### Jeux d'essais
+
+Afin de comparer la performance des différentes implémentations de Welsh Powell, nous avons écrit une fonction qui génère aléatoirement des graphes non-orientés.
+
+```
+Fonction génèreGrapheNonOrienté (nbSommets)
+
+  graphe := liste contenant nbSommets sous-listes vides
+  
+  Pour i allant de 0 à nbSommets-1
+    nbSuccesseurs := nombre aléatoire supérieur ou égal à 0 et inférieur ou égal à nbSommets
+    successeursAléatoires := liste contenant un nombre aléatoire de successeurs compris entre 0 à nbSommets
+    graphe[i] = successeursAléatoires 
+
+    Pour j allant de 0 à taille(successeursAléatoires)
+        Si successeursAléatoires[j] != i alors
+            On ajoute le sommet i en tant que successeur du sommet successeursAléatoires[j]
+        Fin Si
+    Fin Pour
+
+    On supprime les sommets doublons dans graphe[i]
+
+  Fin Pour
+  
+  Retourner graphe
+  
+Fin génèreGrapheNonOrienté
+```
+
+Cette fonction permet de tester les performances en exécutant n fois chaque algorithme avec des graphes aléatoires dont la taille augmente progressivement de a à b, b compris.
+
+Exemple ci-dessous, avec n = 1000, a = 1 et b = 20
+
+![Figure3](../figures/figure3.png?raw=true)
+
 #### Pseudo-code
 
 ```
